@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="identifying_style.css">
+
+<!--JS============================================-->
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="../firebase_connection.js"></script>
+   
+    <script>
+
+        // 1. get authentication token from rapberry pi/ firebase - pending
+        // 2. compare it with all children 
+        // 3. get correct child details
+        // 4. send details to next page
+      
+        var childId; // Replace with your child_id
+        const db = firebase.firestore();
+        var database = firebase.database();
+
+        // Listen for changes to the data
+        var dbRef = firebase.database().ref('RFID/tag_code');
+
+        // Listen for changes in the database
+        dbRef.on('value', function(snapshot) {
+        // Get the data from the snapshot
+        childId = snapshot.val();
+
+        console.log(childId); // Display the data in the console
+                
+                const docRef = db.collection("child").doc(childId);
+        
+                docRef
+                .get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        const { fname, lname, age, profile_pic } = doc.data();
+                        
+            
+                    // // Do something with the name and age, like display them on the page
+                    // document.getElementById("fname").textContent = fname;
+                    // document.getElementById("lname").textContent = lname;
+                    // document.getElementById("age").textContent = age;
+                    console.log(`The child's name is ${fname} and lname is ${lname} their age is ${age} profile pic is ${profile_pic}.`);
+        
+                    setTimeout(() => {
+        
+                    location.href = "../child_identified/child_identified_flex.html?fname=" + encodeURIComponent(fname) + "&lname=" + encodeURIComponent(lname) + "&age=" + encodeURIComponent(age) + "&profile_pic=" + encodeURIComponent(profile_pic) + "&childId=" + encodeURIComponent(childId);
+        
+                    }, 3000);
+                
+        
+                    } else {
+                    console.log("No such document!");
+                    alert("Wrong ID. Please Provide correct ID Card.");
+                    }
+                })
+                .catch((error) => {
+                    console.log("Error getting document:", error);
+                });
+
+
+
+
+
+
+
+
+        
+        });
+
+       
+
+
+
+    </script>
+<!--==============================================-->
+  
+</head>
+<body>
+
+    <br><br><br><br>
+
+    
+<p class="text1"> Identifiying Child.. </p>
+
+<br> 
+
+<p class="text2"> Please provide ID to Me </p>
+
+<!-- <audio id="start-sound" src="../voice/camera_flashing.mp3"></audio> -->
+
+<script> 
+const spokenMessage = `Please provide ID to Me`;
+const spokenUtterance = new SpeechSynthesisUtterance(spokenMessage);
+
+// add an event listener to speak the message when the page loads
+window.addEventListener('load', () => {
+  window.speechSynthesis.speak(spokenUtterance);
+});
+
+</script>
+
+    <div class="loader"></div>
+
+</body>
+</html>

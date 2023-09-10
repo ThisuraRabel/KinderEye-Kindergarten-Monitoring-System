@@ -1,0 +1,123 @@
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+  .flex-container {
+      display: flex;
+      padding: 10px;
+  }
+
+  .flex-child {
+      flex: 1;
+      /* border: 2px solid yellow; */
+      text-align: left;
+      background-color: #80bff3;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }  
+
+  .flex-child:first-child {
+      margin-right: 20px;
+  } 
+  .container {
+    /* display: flex;  */
+    justify-content: space-between;
+    max-width: 1150px;
+    margin: 10px auto;
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #444444;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+ 
+  button {
+    background-color: #2196f3;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .buttonlarge {
+    background-color: #2196f3;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .buttonsmall {
+    background-color: #2196f3;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  button:hover {
+    background-color: #0d8ddf;
+  }
+  button:active {
+    transform: translateY(2px);
+  }
+  .back-button {
+    background-color: #cccccc;
+  }
+  .back-button:hover {
+    background-color: #aaaaaa;
+  }
+  .inputbox1 {       
+    /* text-align: center; */
+    object-position: 20px 20px;            
+  }
+  .values {
+    color: #0714a7;
+    font-size: 17px;
+    text-align: center;
+    justify-content: center;
+    /* font-family: Arial; */
+    font-family: 'Comic Sans MS';
+    /* border: 2px solid rgb(255, 255, 255); */
+    font-weight: bold;
+    padding: 5px 10px;
+  }
+  .values1 {
+    color: #532a89;
+    font-size: 17px;
+    text-align: center;
+    
+  }
+  .values2 {
+    color: #462b13;
+    font-size: 17px;
+    text-align: left;
+    
+  }
+
+  .textbox{
+    font-size: 17px;
+    border: 2px solid rgb(0, 0, 0);
+  }
+
+  .scrollable-box {
+    height: 200px; /* set the height of the box */
+    overflow-y: auto; /* set the overflow-y property to auto to enable scrolling */
+  }

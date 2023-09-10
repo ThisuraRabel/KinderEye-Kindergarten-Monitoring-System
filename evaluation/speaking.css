@@ -1,0 +1,130 @@
+.text1{ /* Heading */
+    font-size: 35px;
+    text-align: center;
+    justify-content: center;
+    /* font-family: Arial; */
+     font-family: 'Comic Sans MS'; 
+    /* font-weight: bold; */
+    
+}
+
+.first_row{
+    display: flex;
+    background-color: #cacfe2;
+    width: 980px;
+    height: 400px;
+    margin-left: 100px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.button1 {
+    background-color: #0765b1;
+    color: #ffffff;
+    width: 110px;
+    height: 40px;
+    /* padding: 5px 10px; */
+    margin-left: 160px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.button2 {
+    background-color: #0765b1;
+    color: #ffffff;
+    width: 130px;
+    height: 40px;
+    /* padding: 5px 10px; */
+    margin-left: 400px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.next-button{
+  
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.second_row{
+    display: flex;
+    /* background-color: #98a7d8; */
+    width: 980px;
+    height: 70px;
+    padding: 5px;
+    margin-left: 100px;
+    align-content: space-around;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px; */
+} 
+
+.object{
+    width: 400px;
+    height: 350px;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    /* border-width: 5px; */
+    border: 5px solid black;
+
+}
+
+.colorful-panel {
+    background-color: #f8c291; /* set background color */
+    /* padding: 5px; add padding for text spacing */
+    color: #040404; /* set text color */
+    font-size: 35px;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    margin-left: 100px;
+    margin-top: 120px;
+    border-radius: 10px; /* add rounded corners */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* add shadow */
+    font-family: 'Comic Sans MS';
+    border: 2px solid black;
+}
+  
+
+.button_img{
+    width: 80px;
+    height: 80px;
+    margin-left: 20px;
+    margin-top: 150px;
+    cursor: pointer;
+
+}
+
+.button_set{
+
+    margin-left: 100px;
+    margin-top: 20px;
+
+}
+
+.button_large{
+    background-color: #0765b1;
+    color: #ffffff;
+    width: 100px;
+    height: 50px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}

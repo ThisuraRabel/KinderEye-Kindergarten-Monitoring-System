@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher and Parent Account Form</title>
+
+    <link rel="stylesheet" href="signup.css">
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="../firebase_connection.js"></script>
+    <script src="signup.js"></script>
+
+</head>
+<body>
+	<h2 class="text1" >Teacher and Parent Account Form</h2><br><br>
+	<div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'teacher')">Teacher Account</button>
+		<button class="tablinks" onclick="openTab(event, 'parent')">Parent Account</button>
+		
+	</div>
+
+    <div id="teacher" class="tabcontent">
+		<h3>Teacher Account</h3>
+		<form>
+			<label for="username">Username:</label>
+			<input type="text" id="tusername" name="username"><br><br>
+            <label for="email">Email:</label>
+			<input type="text" id="temail" name="email"><br><br>
+            <label for="password">Password:</label>
+			<input type="text" id="tpassword" name="password"><br><br>
+            <label for="fullname">Full Name:</label>
+			<input type="text" id="tfullname" name="fullname"><br><br>
+           
+			<!-- <input type="submit" onclick="create_teacher()" value="Submit"> -->
+		</form>
+
+		<div class="flex">
+			<button class="button_bottom2" id="button1" onclick="location.href='../index.html';">Back</button><br>
+			<button class="button_bottom1" id="button1" onclick="create_teacher()">Sign Up</button><br>
+		</div> 
+       
+	</div>
+	
+	
+	<div id="parent" class="tabcontent">
+		<h3>Parent Account</h3>
+		<form>
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username"><br><br>
+            <label for="password">Password:</label>
+			<input type="text" id="password" name="password"><br><br>
+            <label for="fullname">Full Name:</label>
+			<input type="text" id="fullname" name="fullname"><br><br>
+            <label for="email">Email:</label>
+			<input type="text" id="email" name="email"><br><br>
+			<!-- <input type="submit" onclick="create_parent()" value="Submit"> -->
+		</form>
+		<div class="flex">
+			<button class="button_bottom2" id="button1" onclick="location.href='../index.html';">Back</button><br>
+			<button class="button_bottom1" id="button1" onclick="create_teacher()">Sign Up</button><br>
+		</div> 
+	</div>
+	
+	
+</body>
+</html>

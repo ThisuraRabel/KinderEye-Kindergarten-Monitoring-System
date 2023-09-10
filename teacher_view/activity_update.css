@@ -1,0 +1,327 @@
+.text1{ /* Heading */
+    font-size: 35px;
+    text-align: center;
+    justify-content: center;
+    /* font-family: Arial; */
+     font-family: 'Comic Sans MS'; 
+    /* font-weight: bold; */
+    
+}
+
+.activity_text{ /* Heading */
+    font-size: 15px;
+    text-align: center;
+    justify-content: center;
+    margin-top: 0px;
+    /* font-family: Arial; */
+     font-family: 'Comic Sans MS'; 
+    /* font-weight: bold; */
+    
+}
+
+.speaking_update{
+    background-color: #cacfe2;
+    width: 1100px;
+    height: 460px;
+    margin-left: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.reading_update{
+
+    background-color: #cacfe2;
+    width: 1100px;
+    height: 2030px;
+    margin-left: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+} 
+
+.writing_update{
+  
+    background-color: #cacfe2;
+    width: 1100px;
+    height: 460px;
+    margin-left: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+} 
+
+.listening_update{
+ 
+    background-color: #cacfe2;
+    width: 1100px;
+    height: 500px;
+    margin-left: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+} 
+
+.button_row{
+    display: flex;
+    width: 1100px;
+    height: 70px;
+    margin-left: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #cacfe2;
+} 
+
+.speaking_steps{
+    display: flex;
+    width: 1050px;
+    height: 340px;
+    /* padding: 5px; */
+    margin-left: 30px;
+    /* align-items: center; */
+    /* align-content: space-around; */
+    /* background-color: #f8c291; */
+} 
+
+/* .image-preview{
+    width: 200px;
+    height: 200px;
+
+    margin-right: 10px;
+   
+
+} */
+
+.image-preview {
+    /* display: inline-block; */
+    margin-right: 10px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+    
+  }
+
+.image-preview img {
+    width: 200px;
+    height: 200px;
+    
+  }
+
+.textbox{
+    width: 120px;
+    height: 20px;
+    margin-top: 20px;
+    margin-left: 40px;
+    /* display: inline-block; */
+    
+}
+
+.small_button{
+    background-color: #0765b1;
+    color: #ffffff;
+    width: 110px;
+    height: 40px;
+    padding: 5px 10px;
+    margin-left: 60px;
+    border-radius: 5px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.writing_update_row{
+    display: flex;
+    width: 1050px;
+    height: 250px;
+    padding: 5px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    /* align-content: space-around; */
+    background-color: #e0e7c5;
+} 
+
+.step_heading{
+    margin-left: 30px;
+    color: #082375;
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    font-weight: bold; 
+}
+
+.word{
+    margin-left: 25px;
+    font-size: 14px;
+    font-family: 'Comic Sans MS'; 
+}
+.word_selection{
+    margin-left: 50px;
+    font-size: 14px;
+    font-family: 'Comic Sans MS'; 
+}
+
+.image-preview-reading{  
+    margin-left: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+}
+.image-preview-reading img {
+    width: 300px;
+    height: 150px;
+    
+}
+
+
+.image-preview-reading-selection{
+    margin-left: 20px;
+    margin-bottom: 17px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+}
+.image-preview-reading-selection img {
+    width: 150px;
+    height: 150px;
+}
+
+
+.small_button_reading{
+    background-color: #0765b1;
+    color: #ffffff;
+    width: 110px;
+    height: 40px;
+    padding: 5px 10px;
+    margin-left:97px;
+    border-radius: 5px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.textbox_reading{
+    width: 70px;
+    height: 20px;
+    margin-top: 5px;
+    margin-left: 30px;
+    /* display: inline-block; */
+    
+}
+
+.lettter{
+     /* align-items: center;  */
+     margin-top: 70px;
+     margin-left: 25px;
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: 14px;
+     color: #082375;
+     font-weight: bold;
+     /* align-content: space-around; */
+     /* background-color: #f8c291; */
+}
+
+.catagory_heading{
+    font-size: 20px;
+    
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-left: 20px;
+    padding-top: 8px;
+    /* background-color: #f8c291; */
+}
+
+.button_voice{
+    /* background-color: #0765b1; */
+    /* color: #ffffff; */
+    width: 110px;
+    height: 40px;
+    margin-left: 30px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;  
+}
+
+.audio_text{
+    margin-top: 20px;
+     margin-left: 10px;
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: 16px;
+     color: #082375;
+     font-weight: bold;
+}
+
+.button{
+    background-color: #0765b1;
+    color: #ffffff;
+    width: 90px;
+    height: 30px;
+    margin-left: 500px;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.button1 {
+    background-color: #0765b1;
+    color: #ffffff;
+    width: 110px;
+    height: 40px;
+    margin-left: 160px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.button2 {
+    background-color: #0765b1;
+    color: #ffffff;
+    width: 110px;
+    height: 40px;
+    margin-left: 500px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 21px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.object{
+    width: 400px;
+    height: 350px;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    /* border-width: 5px; */
+    border: 5px solid black;
+
+}
+
+.colorful-panel {
+    background-color: #f8c291; /* set background color */
+    /* padding: 5px; add padding for text spacing */
+    color: #040404; /* set text color */
+    font-size: 35px;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    margin-left: 100px;
+    margin-top: 120px;
+    border-radius: 10px; /* add rounded corners */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* add shadow */
+    font-family: 'Comic Sans MS';
+    border: 2px solid black;
+}
+  
+

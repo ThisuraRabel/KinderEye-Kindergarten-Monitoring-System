@@ -1,0 +1,93 @@
+.bg { /* Main */
+    background-color: #82acce;
+}
+.text1{ /* Heading */
+    font-size: 45px;
+    text-align: center;
+    justify-content: center;
+    /* font-family: Arial; */
+     font-family: 'Comic Sans MS'; 
+    /* font-weight: bold; */
+}
+.inputbox1 {       
+    /* text-align: center; */
+    object-position: 20px 20px;            
+}
+.object{ /* Child Image */
+        object-fit: fill;
+        border: 5px solid #333;
+        /* object-position: 30px 17px; */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        width: 250px;
+        height: 250px;
+}
+.button1 {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 20px;
+    width: 120px;
+    height: 60px;
+    font-family: Arial, sans-serif;
+    background-color: #2196f3;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Flex Container Upper */
+.flex-container1 { /* Main */
+    background-color: #4fce82;
+    height: 300px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.flex-item {  /* Intermidiate */
+    margin: 10px;    
+}
+.item-1 { /* Left */
+    width: 260px;
+    height: 260px;
+    /* background-color: #3086d0; */
+}
+.item-2 { /* Right */
+    width: 400px;
+    min-height: 200px;
+    font-size: 23px;
+    /* border: 3px solid #333; */
+    /* background-color: #5252d1; */
+    justify-content: center;
+    font-family: 'Comic Sans MS';
+    font-weight: bold;
+}
+
+
+/* Flex Container Below */
+.flex-container2 { /* Main */
+    /* background-color: #9fe232; */
+    height: 51px;
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+}
+.flex-item2 {  /* Intermidiate */
+    margin: 130px;    
+}
+.item2-1 { /* Left */
+    width: 260px;
+    height: 100px;
+    /* background-color: #3086d0; */
+}
+.item2-2 { /* Right */
+    width: 200px;
+    height: 100px;
+     /* border: 3px solid #333;  */
+    /* background-color: #5252d1;  */
+   
+}
+

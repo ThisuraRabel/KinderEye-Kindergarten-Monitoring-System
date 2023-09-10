@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <audio id="congrats_sound" src="../voice/children_cheer_sound.mp3"></audio>
+    <audio id="click-sound" src="../voice/button_tiny.mp3"></audio>
+    <style>
+
+        .button_row{
+            display: flex;
+            width: 980px;
+            height: 70px;
+            padding: 5px;
+            margin-left: 100px;
+            align-content: space-around;
+        }
+
+        .score_row{        
+            width: 980px;
+            height: 110px;
+            padding: 5px;
+            margin-left: 120px;
+            align-content: space-around;
+        }
+
+        .picture_row{
+            height: 320px;
+            width: 990px;
+            margin-top: 10px;  
+            margin-left: 100px;
+            background-color: #98a7d8;
+            align-content: space-around;
+            border-radius: 10px;
+        }
+
+        .cdtext{
+            margin-left: 300px;
+            margin-top: 40px;
+            font-weight: bold;
+            color:blue;
+            text-shadow: 3px 3px 3px #000;
+            font-size: 55px;
+        }
+
+        .object{
+            width: 700px;
+            height: 280px;
+            border-radius: 10px;
+            margin-left: 150px;
+            margin-top: 20px;
+        }
+
+        .button_row{
+            
+            width: 980px;
+            margin-top: 10px;  
+            align-content: space-around;
+        }
+
+        .button1 {
+            background-color: #0765b1;
+            color: #ffffff;
+            width: 130px;
+            height: 40px;
+            margin-left: 160px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 22px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .button2 {
+            background-color: #0765b1;
+            color: #ffffff;
+            width: 170px;
+            height: 40px;
+            margin-left: 370px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 22px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+    </style>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var childID = urlParams.get('childId');
+        var marks = urlParams.get('marks');
+        console.log(childID);
+        console.log(marks);
+        var sound1 = document.getElementById("congrats_sound");
+        sound1.play();
+
+        function goToMenu(){
+            var sound2 = document.getElementById("click-sound");
+            sound2.play();
+            setTimeout(() => {           
+            location.href = "../language_actvity_menu.html?childId=" + encodeURIComponent(childID);
+            // "../menu_age4.html?childId=" + encodeURIComponent(childId);
+            }, 1000);
+        }
+
+        function complete_activity(){
+            location.href = "../initial_page/index.html";
+        }
+
+
+    </script>
+    
+</head>
+<body>
+    
+    <div class="score_row">
+        <p class="cdtext"> Your Score: <span id="marks_id"></span></p>
+        <script>
+            
+            var variableValueSpan = document.getElementById("marks_id");
+            variableValueSpan.textContent = marks;
+        </script>
+    </div>
+
+    <div class="picture_row">
+        <img class="object" id="current-image" src="../images/congrats_img.jpg" alt="Current Image"></img>
+    </div>
+
+    <div class="button_row">
+
+        <div class="back_button">
+            <button class="button1" onclick="complete_activity()">Complete</button>
+   
+        </div>
+        <div class="complete_button">
+            
+            <button class="button2" onclick="goToMenu()">Next Activity</button>
+            
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

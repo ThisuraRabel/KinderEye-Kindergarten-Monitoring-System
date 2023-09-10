@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speaking</title>
+    <link rel="stylesheet" href="speaking.css">
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+    <script src="../firebase_connection.js"></script>
+    <audio id="click-sound" src="../voice/button_tiny.mp3"></audio>
+    <script>
+
+        var childID;
+        var marks = 0;
+
+        var urlParams = new URLSearchParams(window.location.search);
+        childID = urlParams.get('childId');
+        console.log(childID);
+
+        const db = firebase.firestore();
+
+        function goBack() {
+            var sound1 = document.getElementById("click-sound");
+            sound1.play();
+            setTimeout(() => {
+                window.history.back();
+            }, 1000);
+
+        }
+
+        function complete_activity(){
+            var sound2 = document.getElementById("click-sound");
+            sound2.play();
+            setTimeout(() => {
+            location.href = "results.html?childId=" + encodeURIComponent(childID) + "&marks=" + encodeURIComponent(marks) ;
+            // "../menu_age4.html?childId=" + encodeURIComponent(childId);
+            }, 1000);
+        }
+
+        const images = [  '../images/activities/speaking/image2.jpg',  '../images/activities/speaking/image3.jpg',  '../images/activities/speaking/image4.jpg',  '../images/activities/speaking/image5.jpg'];
+
+        let currentIndex = 0; // index of the current image
+
+            // function to display the current image
+        function displayImage() {
+            const currentImage = document.getElementById('current-image');
+            currentImage.src = images[currentIndex];
+        }
+
+        function nextImage() {
+            if (currentIndex === images.length - 1) {
+                // wrap around to the first image if at the last image
+                currentIndex = 0;
+            } else {
+                currentIndex++;
+            }
+            displayImage();
+        }
+
+    </script>
+</head>
+<body>
+
+    <h1 class="text1"> Say What is in Picture </h1>
+
+    <script>
+        const spokenMessage1 = `Say What, is in Picture`;
+        const spokenUtterance1 = new SpeechSynthesisUtterance(spokenMessage1);
+
+        window.addEventListener('load', () => {
+                window.speechSynthesis.speak(spokenUtterance1);
+        });
+    </script>
+
+        <div class="first_row">
+            <div class="picture">
+                <img class="object" id="current-image" src="../images/activities/speaking/image1.jpg" alt="Current Image">
+            </div>
+            <div class="next_button">
+                <img class="button_img" src="../images/icons/Forward_Button.png" id="next-button" onclick="nextImage()"></img>
+
+            </div>
+            <div class="start_stop_display">
+                <div class="colorful-panel">
+                    <p id="transcription"></p>
+                </div>
+                <div class="button_set">
+                    <button class="button_large" id="start-btn">Start</button>
+                    <button class="button_large" id="stop-btn" disabled>Stop</button>
+                    <script>
+                        const startBtn = document.querySelector('#start-btn');
+                        const stopBtn = document.querySelector('#stop-btn');
+                        const transcription = document.querySelector('#transcription');
+                        let recognition = null;
+
+                        if ('webkitSpeechRecognition' in window) {
+                        recognition = new webkitSpeechRecognition();
+                        recognition.continuous = true;
+                        recognition.interimResults = true;
+                        recognition.lang = 'en-US';
+
+                        recognition.onstart = function() {
+                            console.log('Speech recognition started');
+                        };
+
+                        recognition.onresult = function(event) {
+                            let interimTranscript = '';
+                            let finalTranscript = '';
+
+                            for (let i = event.resultIndex; i < event.results.length; i++) {
+                            let transcript = event.results[i][0].transcript;
+                            if (event.results[i].isFinal) {
+                                finalTranscript += transcript;
+                            } else {
+                                interimTranscript += transcript;
+                            }
+                            }
+
+                            transcription.innerHTML = finalTranscript;
+                        };
+
+                        recognition.onerror = function(event) {
+                            console.error('Speech recognition error: ', event.error);
+                        };
+
+                        recognition.onend = function() {
+                            console.log('Speech recognition ended');
+                        };
+                        } else {
+                        console.error('Web Speech API is not supported in this browser');
+                        }
+
+                        startBtn.addEventListener('click', () => {
+                        recognition.start();
+                        startBtn.disabled = true;
+                        stopBtn.disabled = false;
+                        });
+
+                        stopBtn.addEventListener('click', () => {
+                        recognition.stop();
+                        startBtn.disabled = false;
+                        stopBtn.disabled = true;
+                        //   const trans = document.getElementById("transcription");
+                        const trans = document.getElementById('transcription').textContent;
+                        console.log(trans);
+
+                        // Reference to the Firestore document
+                        // Reference to the Firestore document
+var docRef = db.collection("language_activity_updatable_data").doc("speaking");
+
+// Fetch the document data
+docRef.get().then(function(doc) {
+    if (doc.exists) {
+        // Extract the field values from the document
+        var step1 = doc.get("step1");
+        var step2 = doc.get("step2");
+        var step3 = doc.get("step3");
+        var step4 = doc.get("step4");
+        var step5 = doc.get("step5");
+
+        // Store the values in an array
+        const storedValues = [step1, step2, step3, step4, step5];
+
+    
+
+        // Check if trans includes any of the stored values
+        for (var i = 0; i < storedValues.length; i++) {
+            if (trans.includes(storedValues[i])) {
+                marks += 20;
+            }
+        }
+
+        // Output the updated marks value
+        console.log("Updated marks:", marks);
+    } else {
+        console.log("Document not found");
+    }
+}).catch(function(error) {
+    console.log("Error getting document:", error);
+});
+
+
+                        var docRef = db.collection("language_skills").doc(childID);
+
+                            // Update the field of the document
+                            docRef.update({
+                                ["speaking"]: marks
+                            })
+                            .then(function() {
+                                console.log("Document successfully updated!");
+                            })
+                            .catch(function(error) {
+                                console.error("Error updating document: ", error);
+                            });
+
+                        });
+
+                    </script>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="second_row">
+
+            <div class="back_button">
+                <button class="button1" onclick="goBack()">Back</button>
+
+            </div>
+            <div class="complete_button">
+                <button class="button2" onclick="complete_activity()">Complete</button>
+
+            </div>
+
+        </div>
+
+
+
+
+
+</body>
+</html>

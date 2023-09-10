@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Score Calculation</title>
+</head>
+<body>
+  <label for="time">Time:</label>
+  <input type="number" id="time" min="0" required>
+  <br>
+  <label for="blocks">Blocks:</label>
+  <input type="number" id="blocks" min="0" required>
+  <br>
+  <label for="completed">Completed:</label>
+  <select id="completed">
+    <option value="1">Completed</option>
+    <option value="2">Not Completed</option>
+  </select>
+  <br>
+  <button onclick="calculateScore()">Calculate Score</button>
+  <br>
+  <div id="score"></div>
+
+  <script>
+    function calculateScore() {
+      const timeInput = document.getElementById('time');
+      const blocksInput = document.getElementById('blocks');
+      const completedSelect = document.getElementById('completed');
+      const scoreElement = document.getElementById('score');
+
+      const time = parseInt(timeInput.value);
+      const blocks = parseInt(blocksInput.value);
+      const completed = completedSelect.value;
+
+      if (Number.isNaN(time) || Number.isNaN(blocks)) {
+        scoreElement.textContent = 'Invalid input';
+        return;
+      }
+
+      const f = (time * 60) / blocks;
+      console.log(f)
+      let score;
+
+      if (completed === '1') {
+        score = ((100-f) / 90) * 100;
+      } else if (completed === '2') {
+        score = ((100-f) / 90) * 70;
+      } else {
+        scoreElement.textContent = 'Invalid input';
+        return;
+      }
+
+      scoreElement.textContent = 'Score: ' + score.toFixed(2);
+    }
+  </script>
+</body>
+</html>

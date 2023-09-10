@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Main</title>
+    <link rel="stylesheet" href="parent_view.css">
+
+      <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+      <script src="../../firebase_connection.js"></script>
+
+      <script>
+          
+          var urlParams = new URLSearchParams(window.location.search);
+          var teacherID = urlParams.get('variable');
+          console.log(teacherID);
+
+          var countChild = 0;
+          var db = firebase.firestore();
+          var docRef = db.collection("parents").doc(teacherID);
+
+          docRef.get().then(function(doc) {
+            if (doc.exists) {
+              
+             
+              var field1Value = doc.data().email;
+              var field2Value = doc.data().fullname;
+              var field3Value = doc.data().username;
+
+              document.getElementById("email").innerHTML = field1Value;
+              document.getElementById("fullname").innerHTML = field2Value;
+              document.getElementById("username").innerHTML = field3Value;
+              
+
+              // Replace "collectionName" with the name of the collection you want to search in
+              const collectionRef = db.collection("child");
+
+              // Replace "fieldName" with the name of the field you want to search for
+              const query = collectionRef.where("puname", "==", field3Value);
+
+              query.get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                  const childId = doc.id;
+                  const Cfullname = doc.data().fname + " " + doc.data().lname;
+                  const age = doc.data().age;
+
+                  console.log(childId, Cfullname, age);
+
+                  // Replace "resultsDiv" with the ID of the div where you want to display the results
+                  const resultsDiv = document.getElementById("resultsDiv");
+                  const result = document.createElement("div");
+                  // result.innerText = `Child ID: ${childId} | Fullname: ${Cfullname} | Age: ${age}`;
+                  // result.innerText = `Child ID: ${childId} |<br> Fullname: ${fullname} |<br> Age: ${age} | <br><hr>`;
+                  // result.innerText = "Child ID: " + childId + "<br> Fullname: " + Cfullname + "<br>Age: " + age + "<br><hr>";
+                  result.innerHTML = "<hr>ID: " + childId + "<br>Name: " + Cfullname + "<br>Age: " + age + "<br><hr>";
+                 
+                  countChild++;
+                  document.getElementById("count").innerHTML = countChild;
+              
+                  resultsDiv.appendChild(result);
+                });
+              });
+
+
+            } else {
+              console.log("No such document!");
+            }
+          }).catch(function(error) {
+            console.log("Error getting document:", error);
+          });
+
+          function goToPerfViewPage(){
+              var childIDSend = document.getElementById("childID");
+              console.log(childIDSend.value);
+              setTimeout(() => {
+              location.href = "../child_perfomance/child_performance.html?variable=" + childIDSend.value;
+              }, 1000);
+
+          }
+
+
+
+          
+
+
+
+      </script>
+</head>
+<body>
+
+    <h1>Parent Menu</h1> 
+    <div class="flex-container">
+        
+      <div class="flex-child magenta">
+            <p><b class='values2'> My Details </b> </p> 
+            <p><b class="values1" >Username  :</b>   <span class="values" id="username"></span></p>
+            <p><b class="values1" >Name  :</b> <span class="values" id="fullname"></span></p>
+            <p><b class="values1" >Email  :</b>      <span class="values" id="email"></span></p>
+      </div>
+      
+      <div class="flex-child green">
+            
+            <p><b class="values1" >Child Count  :</b> <span class="values" id="count"></span></p>
+            <input type="text" class="textbox" id="childID" placeholder="Enter child ID..."><br><br>
+            <button class="buttonlarge" onclick="goToPerfViewPage()">View Child Performance</button>
+      </div>
+      
+    </div>
+
+    <div class="container">
+      <div class="scrollable-box">
+        <div id="resultsDiv"></div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="button-container">
+        <button class="back-button" onclick="location.href='../index.html';">Sign Out</button>
+        <button class="proceed-button" onclick="location.href='create_child.html';">Create Child</button>
+        <!-- <button class="proceed-button" onclick="location.href='../login.html';">Sign Out</button> -->
+      </div>
+    </div>
+    
+</body>
+</html>

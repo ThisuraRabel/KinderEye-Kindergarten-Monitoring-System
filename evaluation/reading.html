@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age 4 Speaking</title>
+    <link rel="stylesheet" href="reading.css">
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+    <script src="../firebase_connection.js"></script>
+    <audio id="click-sound" src="../voice/button_tiny.mp3"></audio>
+    <script>
+
+        var childID;
+        var marks = 0;
+        var currentIndex = 0;
+
+        var urlParams = new URLSearchParams(window.location.search);
+        childID = urlParams.get('childId');
+        console.log(childID);
+        const db = firebase.firestore();
+
+
+        function goBack() {
+            var sound1 = document.getElementById("click-sound");
+            sound1.play();
+            setTimeout(() => {           
+                window.history.back();
+            }, 1000);
+
+        }
+
+        function complete_activity(){
+            console.log(marks);
+            
+            var docRef = db.collection("language_skills").doc(childID);
+
+            // Update the field of the document
+            docRef.update({
+                ["reading"]: marks
+            })
+            .then(function() {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });
+
+            var sound2 = document.getElementById("click-sound");
+            sound2.play();
+            setTimeout(() => {           
+            location.href = "results.html?childId=" + encodeURIComponent(childID) + "&marks=" + encodeURIComponent(marks);
+            // "../menu_age4.html?childId=" + encodeURIComponent(childId);
+            }, 4000);
+        }
+
+        
+        const images = [  '../images/letters/reading/1/word/img.jpg', '../images/letters/reading/2/word/img.jpg',  '../images/letters/reading/3/word/img.jpg',  '../images/letters/reading/4/word/img.jpg',  '../images/letters/reading/5/word/img.jpg'];
+
+            // function to display the current image
+        function displayImage() {
+            const currentImage = document.getElementById('current-image');
+            currentImage.src = images[currentIndex];
+        }
+
+        function nextImage() {
+                currentIndex++;
+            if (currentIndex <= 4){
+                displayImage();
+                loadNxtLetterSet();
+            }
+            
+        }
+
+        function getSelectData1(){
+            document.getElementById("first_pic").style.display = "none";
+            // document.getElementById("first_pic").disabled = true;
+            document.getElementById("second_pic").style.display = "none";
+            document.getElementById("third_pic").style.display = "none";
+        
+            if (currentIndex == 1){
+                marks += 20;
+            }
+        }
+
+        function getSelectData2(){
+            document.getElementById("first_pic").style.display = "none";
+            document.getElementById("second_pic").style.display = "none";
+            document.getElementById("third_pic").style.display = "none";
+
+            if (currentIndex == 2){
+                marks += 20;
+            }
+            if (currentIndex == 4){
+                marks += 20;
+            }
+        }
+
+        function getSelectData3(){
+            document.getElementById("first_pic").style.display = "none";
+            document.getElementById("second_pic").style.display = "none";
+            document.getElementById("third_pic").style.display = "none";
+
+            if (currentIndex == 3){
+                marks += 20;
+            }
+            if (currentIndex == 0){
+                marks += 20;
+            }
+        }
+
+
+        function loadNxtLetterSet() {
+            document.getElementById("first_pic").style.display = "block";
+            document.getElementById("second_pic").style.display = "block";
+            document.getElementById("third_pic").style.display = "block";
+
+            const images1 = ['../images/letters/reading/1/img1.png', '../images/letters/reading/2/img1.png',  '../images/letters/reading/3/img1.png',  '../images/letters/reading/4/img1.png', '../images/letters/reading/5/img1.png'];
+            const images2 = ['../images/letters/reading/1/img2.png', '../images/letters/reading/2/img2.png',  '../images/letters/reading/3/img2.png',  '../images/letters/reading/4/img2.png', '../images/letters/reading/5/img2.png'];
+            const images3 = ['../images/letters/reading/1/img3.png', '../images/letters/reading/2/img3.png',  '../images/letters/reading/3/img3.png',  '../images/letters/reading/4/img3.png', '../images/letters/reading/5/img3.png'];
+
+            // function to display the current image
+      
+            const currentImage1 = document.getElementById('first_pic');
+            currentImage1.src = images1[currentIndex];
+            const currentImage2 = document.getElementById('second_pic');
+            currentImage2.src = images2[currentIndex];
+            const currentImage3 = document.getElementById('third_pic');
+            currentImage3.src = images3[currentIndex];
+            console.log(currentIndex);
+            console.log(marks);
+
+            if (currentIndex == 5){    
+                document.getElementById("next-button").style.display = "none";
+            }
+
+
+        }
+
+    </script>
+</head>
+<body>
+
+    <h1 class="text1"> Select the First Letter </h1>
+
+    <script>
+        const spokenMessage1 = `Select the first letter of the word`;
+        const spokenUtterance1 = new SpeechSynthesisUtterance(spokenMessage1);
+
+        window.addEventListener('load', () => {
+                window.speechSynthesis.speak(spokenUtterance1);
+        });
+    </script>
+ 
+        <div class="first_row">
+            <div class="picture">
+                <img class="object" id="current-image" src="../images/letters/reading/1/word/img.jpg" alt="Current Image">     
+            </div>
+
+            <div class="next_button">
+                <img class="button_img" src="../images/icons/Forward_Button.png" id="next-button" onclick="nextImage()"></img>     
+            </div>
+
+
+            <div class="pic_list">
+                <img class="small_pic1" src="../images/letters/reading/1/img1.png" id="first_pic" onclick="getSelectData1()"></img>
+            </div>
+
+            <div class="pic_list">
+                <img class="small_pic" src="../images/letters/reading/1/img2.png" id="second_pic" onclick="getSelectData2()"></img>
+            </div>
+
+            <div class="pic_list">
+                <img class="small_pic" src="../images/letters/reading/1/img3.png" id="third_pic" onclick="getSelectData3()"></img>
+            </div> 
+
+        </div>
+
+
+        <div class="second_row">
+    
+            <div class="back_button">
+                <button class="button1" onclick="goBack()">Back</button>
+            </div>
+            <div class="complete_button">
+                <button class="button2" onclick="complete_activity()">Complete</button>             
+            </div>
+          
+        </div>
+
+
+</body>
+</html>

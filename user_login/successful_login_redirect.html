@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../initial_page/index_style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="../firebase_connection.js"></script>
+    
+    
+</head>
+<body>
+  <script>
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var email = urlParams.get('variable');
+    console.log(email);
+
+    var db = firebase.firestore();
+    var DBcolection;
+    var documentId;
+
+    // Search in first collection
+    DBcolection = db.collection("parents");
+    // db.collection("parents").where("email", "==", email)
+    DBcolection.where("email", "==", email)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id);
+          documentId = doc.id;
+          
+        });
+      })
+      .catch((error) => {
+        console.log("Error searching in parents: ", error);
+      });
+
+      // if (documentId == null){
+            // Search in second collection
+            DBcolection = db.collection("teachers");
+            DBcolection.where("email", "==", email)
+              .get()
+              .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                  console.log(doc.id);
+                  documentId = doc.id;
+                  
+                });
+              })
+              .catch((error) => {
+                console.log("Error searching in teachers: ", error);
+              });
+
+            setTimeout(() => {
+               console.log(documentId);
+                var DBcolectionname;
+                var db = firebase.firestore();
+                db.collection("teachers").where(firebase.firestore.FieldPath.documentId(), '==', documentId)
+                .get().then(function(querySnapshot) {
+                  if (querySnapshot.size > 0) {
+                    var collectionId = querySnapshot.docs[0].ref.parent.id;
+                    console.log("Document ID " + documentId + " exists in collection " + collectionId);
+                    DBcolectionname = collectionId;
+                  } else {
+                    console.log("Document ID " + documentId + " does not exist in any collection");
+                  }
+                });
+
+                var DBcolectionname;
+                var db = firebase.firestore();
+                db.collection("parents").where(firebase.firestore.FieldPath.documentId(), '==', documentId)
+                .get().then(function(querySnapshot) {
+                  if (querySnapshot.size > 0) {
+                    var collectionId = querySnapshot.docs[0].ref.parent.id;
+                    console.log("Document ID " + documentId + " exists in collection " + collectionId);
+                    DBcolectionname = collectionId;
+                  } else {
+                    console.log("Document ID " + documentId + " does not exist in any collection");
+                  }
+                });
+                                
+                setTimeout(() => {
+                  console.log(DBcolectionname);
+                    if (DBcolectionname == "teachers"){ 
+                        location.href = "../teacher_view/teacher_view.html?variable=" + documentId;
+                    } else{                   
+                        location.href = "../parent_view/parent_main.html?variable=" + documentId;
+                    }
+                }, 1000);
+
+
+            }, 3000);
+
+</script>
+
+    <div class="loader"></div>
+
+    <!-- <script>
+        
+
+    </script> -->
+    
+</body>
+</html>

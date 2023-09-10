@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.text1{ /* Heading */
+    font-size: 35px;
+    text-align: center;
+    justify-content: center;
+    /* font-family: Arial; */
+     font-family: 'Comic Sans MS'; 
+    /* font-weight: bold; */
+    
+}
+
+button[id="button1"] {
+    display: inline-block;
+    background-color: #2196f3;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    height: 38px;
+    width: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    
+  }
+  button[id="button1"]:hover {
+    background-color: #0d8ddf;
+  }
+  button[id="button1"]:nth-of-type(2n) {
+    background-color: #ff9800;
+  }
+  button[id="button1"]:nth-of-type(2n):hover {
+    background-color: #e68a00;
+  }
+
+  .button_bottom1{
+      margin-left: 20px;
+  }
+
+  .button_bottom2{
+      margin-left: 40px;
+  }
+
+  .flex{
+    display: flex;
+    align-items: center;
+  }
+  

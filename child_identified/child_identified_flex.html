@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Document</title>
+    <link rel="stylesheet" href="flex.css">
+
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+    <script src="../firebase_connection.js"></script>
+    <audio id="click-sound" src="../voice/button_tiny.mp3"></audio>
+    
+    <script>
+
+        var age_redirect;
+        var childId;
+
+        function SoundandProceed() {
+          var sound = document.getElementById("click-sound");
+          sound.play();
+          setTimeout(() => {
+
+            console.log(age_redirect);
+                if (age_redirect == "4"){
+                    location.href = "../language_actvity_menu.html?childId=" + encodeURIComponent(childId);
+                }else{
+                    location.href = "../language_actvity_menu.html?childId=" + encodeURIComponent(childId);
+                }
+ 
+            }, 1000);
+        }
+
+        function SoundandBack() {
+          var sound = document.getElementById("click-sound");
+          sound.play();
+            setTimeout(() => {
+
+            location.href = "../initial_page/index.html"
+            }, 1000);
+        }
+
+  
+    </script>
+
+</head>
+
+
+<body class="bg">
+
+    <h1 class="text1"> Identification successfull ! </h1>
+
+    <div class="flex-container1">
+        <div class="flex-item item-1">
+            <img class="object" id="child-image" alt="Child Image" >
+ 
+        </div>
+
+        <div class="flex-item item-2">
+            <P class='inputbox1'><strong id="child-name"></strong></P>
+            <P class='inputbox1'><strong id="child-age"></strong></P><br>      
+            
+        </div>
+    </div>
+
+    <script>
+        // get the query string parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+    
+        // retrieve the values of the fname, lname, and age variables from the query string
+        const fname = urlParams.get('fname');
+        const lname = urlParams.get('lname');
+        const age = urlParams.get('age');
+        const ID = urlParams.get('childId');
+        const profile_pic = urlParams.get('profile_pic');
+
+        childId = ID;
+        age_redirect = age;
+
+        var storageRef = firebase.storage().ref();
+
+        // get the download URL for the image from Firebase Storage
+        storageRef.child("images/" + profile_pic).getDownloadURL().then(function(url) {
+        // set the "src" attribute of the <img> element to the download URL
+        var childImageElement = document.getElementById("child-image");
+        childImageElement.src = url;
+        }).catch(function(error) {
+        console.error(error);
+        });
+    
+        // concatenate the fname and lname values together
+        const fullName = fname + ' ' + lname;
+    
+        // set the innerHTML of the <strong> elements to the retrieved values
+        const childNameElement = document.getElementById('child-name');
+        childNameElement.innerHTML = `<strong>Name:</strong> ${fullName}`;
+    
+        const childAgeElement = document.getElementById('child-age');
+        childAgeElement.innerHTML = `<strong>Age:</strong> ${age}`;
+
+            
+         
+ 
+    </script>
+
+    <!-- Use flex -->
+    <br><br>
+    <div class="flex-container2">
+        <div class="flex-item2 item2-1">
+                <button class='button1' onclick="SoundandBack()" type="submit">Back</button>
+        </div>
+
+        <div class="flex-item2 item2-2">
+                <button class='button1' onclick="SoundandProceed()" type="submit">Proceed</button>
+                        
+        </div>
+    </div>
+
+</body>
+</html>

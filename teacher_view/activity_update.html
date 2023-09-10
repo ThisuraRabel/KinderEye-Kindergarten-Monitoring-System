@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speaking</title>
+    <link rel="stylesheet" href="activity_update.css">
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+    <script src="../firebase_connection.js"></script>
+    <audio id="click-sound" src="../voice/button_tiny.mp3"></audio>
+    <script>
+
+        const db = firebase.firestore();
+
+        function goBack() {
+            var sound1 = document.getElementById("click-sound");
+            sound1.play();
+            setTimeout(() => {           
+                window.history.back();
+            }, 1000);
+
+        }
+
+        function previewImage(event, previewId) {
+                  var fileInput = event.target;
+                  var file = fileInput.files[0];
+                  var imageType = /image.*/;
+            
+                  if (file.type.match(imageType)) {
+                    var reader = new FileReader();
+            
+                    reader.onload = function (e) {
+                      var img = new Image();
+                      img.src = reader.result;
+            
+                      var imagePreview = document.getElementById(previewId);
+                      imagePreview.innerHTML = '';
+                      imagePreview.appendChild(img);
+                    }
+            
+                    reader.readAsDataURL(file);
+                  } else {
+                    alert('Please select an image file.');
+                  }
+        }
+
+        function uploadSpeakingData(){
+
+            var formData = new FormData();
+            
+            var fileInput1 = document.getElementById('image-input1');
+            var file1 = fileInput1.files[0];
+            formData.append('image1', file1);
+      
+            var fileInput2 = document.getElementById('image-input2');
+            var file2 = fileInput2.files[0];
+            formData.append('image2', file2);
+
+            var fileInput3 = document.getElementById('image-input3');
+            var file3 = fileInput3.files[0];
+            formData.append('image3', file3);
+
+            var fileInput4= document.getElementById('image-input4');
+            var file4 = fileInput4.files[0];
+            formData.append('image4', file4);
+
+            var fileInput5 = document.getElementById('image-input5');
+            var file5 = fileInput5.files[0];
+            formData.append('image5', file5);
+      
+            fetch('upload_speaking.php', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              if (response.ok) {
+                alert('Images uploaded successfully!');
+              } else {
+                alert('Error uploading images.');
+              }
+            })
+            .catch(error => {
+              console.error(error);
+              alert('An error occurred during the upload.');
+            });
+
+            
+
+            var newValue1 = document.getElementById("name_speaking1").value;
+            var newValue2 = document.getElementById("name_speaking2").value;
+            var newValue3 = document.getElementById("name_speaking3").value;
+            var newValue4 = document.getElementById("name_speaking4").value;
+            var newValue5 = document.getElementById("name_speaking5").value;
+            // Get a reference to the document to be updated
+            var docRef = db.collection("language_activity_updatable_data").doc("speaking");
+            docRef.update({
+                step1: newValue1,
+                step2: newValue2,
+                step3: newValue3,
+                step4: newValue4,
+                step5: newValue5
+
+            })
+            .then(function() {
+                console.log("Document successfully updated!");
+                // Reset the input fields after successful update
+                // document.getElementById("name_speaking2").value = "";
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });    
+            
+        }
+      
+        function uploadReadingData1(){
+            var formData = new FormData();
+            
+            var fileInput1 = document.getElementById('s1_reading_word_image');
+            var file1 = fileInput1.files[0];
+            formData.append('image1', file1);
+      
+            var fileInput2 = document.getElementById('s1_reading_letter_image1');
+            var file2 = fileInput2.files[0];
+            formData.append('image2', file2);
+
+            var fileInput3 = document.getElementById('s1_reading_letter_image2');
+            var file3 = fileInput3.files[0];
+            formData.append('image3', file3);
+
+            var fileInput4= document.getElementById('s1_reading_letter_image3');
+            var file4 = fileInput4.files[0];
+            formData.append('image4', file4);
+
+            fetch('upload_reading1.php', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              if (response.ok) {
+                alert('Images uploaded successfully!');
+              } else {
+                alert('Error uploading images.');
+              }
+            })
+            .catch(error => {
+              console.error(error);
+              alert('An error occurred during the upload.');
+            });
+
+            
+            var newValue1 = document.getElementById("name_writing_1").value;
+            
+            // Get a reference to the document to be updated
+            var docRef = db.collection("language_activity_updatable_data").doc("reading_letter");
+            docRef.update({
+                letter1: newValue1,
+            })
+            .then(function() {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });    
+            
+        
+        }
+
+        function uploadReadingData2(){
+            var formData = new FormData();
+            
+            var fileInput1 = document.getElementById('s2_reading_word_image');
+            var file1 = fileInput1.files[0];
+            formData.append('image1', file1);
+      
+            var fileInput2 = document.getElementById('s2_reading_letter_image1');
+            var file2 = fileInput2.files[0];
+            formData.append('image2', file2);
+
+            var fileInput3 = document.getElementById('s2_reading_letter_image2');
+            var file3 = fileInput3.files[0];
+            formData.append('image3', file3);
+
+            var fileInput4= document.getElementById('s2_reading_letter_image3');
+            var file4 = fileInput4.files[0];
+            formData.append('image4', file4);
+
+            fetch('upload_reading2.php', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              if (response.ok) {
+                alert('Images uploaded successfully!');
+              } else {
+                alert('Error uploading images.');
+              }
+            })
+            .catch(error => {
+              console.error(error);
+              alert('An error occurred during the upload.');
+            });
+
+            
+            var newValue1 = document.getElementById("name_writing_2").value;
+            
+            // Get a reference to the document to be updated
+            var docRef = db.collection("language_activity_updatable_data").doc("reading_letter");
+            docRef.update({
+                letter2: newValue1,
+            })
+            .then(function() {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });    
+        }
+
+        function uploadReadingData3(){
+            var formData = new FormData();
+            
+            var fileInput1 = document.getElementById('s3_reading_word_image');
+            var file1 = fileInput1.files[0];
+            formData.append('image1', file1);
+      
+            var fileInput2 = document.getElementById('s3_reading_letter_image1');
+            var file2 = fileInput2.files[0];
+            formData.append('image2', file2);
+
+            var fileInput3 = document.getElementById('s3_reading_letter_image2');
+            var file3 = fileInput3.files[0];
+            formData.append('image3', file3);
+
+            var fileInput4= document.getElementById('s3_reading_letter_image3');
+            var file4 = fileInput4.files[0];
+            formData.append('image4', file4);
+
+            fetch('upload_reading3.php', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              if (response.ok) {
+                alert('Images uploaded successfully!');
+              } else {
+                alert('Error uploading images.');
+              }
+            })
+            .catch(error => {
+              console.error(error);
+              alert('An error occurred during the upload.');
+            });
+
+            
+            var newValue1 = document.getElementById("name_writing_3").value;
+            
+            // Get a reference to the document to be updated
+            var docRef = db.collection("language_activity_updatable_data").doc("reading_letter");
+            docRef.update({
+                letter3: newValue1,
+            })
+            .then(function() {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });    
+        }
+
+        function uploadReadingData4(){
+            var formData = new FormData();
+            
+            var fileInput1 = document.getElementById('s4_reading_word_image');
+            var file1 = fileInput1.files[0];
+            formData.append('image1', file1);
+      
+            var fileInput2 = document.getElementById('s4_reading_letter_image1');
+            var file2 = fileInput2.files[0];
+            formData.append('image2', file2);
+
+            var fileInput3 = document.getElementById('s4_reading_letter_image2');
+            var file3 = fileInput3.files[0];
+            formData.append('image3', file3);
+
+            var fileInput4= document.getElementById('s4_reading_letter_image3');
+            var file4 = fileInput4.files[0];
+            formData.append('image4', file4);
+
+            fetch('upload_reading4.php', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              if (response.ok) {
+                alert('Images uploaded successfully!');
+              } else {
+                alert('Error uploading images.');
+              }
+            })
+            .catch(error => {
+              console.error(error);
+              alert('An error occurred during the upload.');
+            });
+
+            
+            var newValue1 = document.getElementById("name_writing_4").value;
+            
+            // Get a reference to the document to be updated
+            var docRef = db.collection("language_activity_updatable_data").doc("reading_letter");
+            docRef.update({
+                letter4: newValue1,
+            })
+            .then(function() {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });    
+        }
+
+        function uploadReadingData5(){
+            var formData = new FormData();
+            
+            var fileInput1 = document.getElementById('s5_reading_word_image');
+            var file1 = fileInput1.files[0];
+            formData.append('image1', file1);
+      
+            var fileInput2 = document.getElementById('s5_reading_letter_image1');
+            var file2 = fileInput2.files[0];
+            formData.append('image2', file2);
+
+            var fileInput3 = document.getElementById('s5_reading_letter_image2');
+            var file3 = fileInput3.files[0];
+            formData.append('image3', file3);
+
+            var fileInput4= document.getElementById('s5_reading_letter_image3');
+            var file4 = fileInput4.files[0];
+            formData.append('image4', file4);
+
+            fetch('upload_reading5.php', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              if (response.ok) {
+                alert('Images uploaded successfully!');
+              } else {
+                alert('Error uploading images.');
+              }
+            })
+            .catch(error => {
+              console.error(error);
+              alert('An error occurred during the upload.');
+            });
+
+            
+            var newValue1 = document.getElementById("name_writing_5").value;
+            
+            // Get a reference to the document to be updated
+            var docRef = db.collection("language_activity_updatable_data").doc("reading_letter");
+            docRef.update({
+                letter5: newValue1,
+            })
+            .then(function() {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });    
+        }
+
+        function uploadWritingData(){
+            var formData = new FormData();
+            
+            var fileInput1 = document.getElementById('image1-input1');
+            var file1 = fileInput1.files[0];
+            formData.append('image1', file1);
+      
+            var fileInput2 = document.getElementById('image1-input2');
+            var file2 = fileInput2.files[0];
+            formData.append('image2', file2);
+
+            var fileInput3 = document.getElementById('image1-input3');
+            var file3 = fileInput3.files[0];
+            formData.append('image3', file3);
+
+            var fileInput4= document.getElementById('image1-input4');
+            var file4 = fileInput4.files[0];
+            formData.append('image4', file4);
+
+            var fileInput5 = document.getElementById('image1-input5');
+            var file5 = fileInput5.files[0];
+            formData.append('image5', file5);
+      
+            fetch('upload_writing.php', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              if (response.ok) {
+                alert('Images uploaded successfully!');
+              } else {
+                alert('Error uploading images.');
+              }
+            })
+            .catch(error => {
+              console.error(error);
+              alert('An error occurred during the upload.');
+            });
+
+            
+
+            var newValue1 = document.getElementById("name_writing1").value;
+            var newValue2 = document.getElementById("name_writing2").value;
+            var newValue3 = document.getElementById("name_writing3").value;
+            var newValue4 = document.getElementById("name_writing4").value;
+            var newValue5 = document.getElementById("name_writing5").value;
+            // Get a reference to the document to be updated
+            var docRef = db.collection("language_activity_updatable_data").doc("writing_letter");
+            docRef.update({
+                letter1: newValue1,
+                letter2: newValue2,
+                letter3: newValue3,
+                letter4: newValue4,
+                letter5: newValue5
+
+            })
+            .then(function() {
+                console.log("Document successfully updated!");
+                // Reset the input fields after successful update
+                // document.getElementById("name_speaking2").value = "";
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });    
+        }
+
+        function uploadListeningData(){
+            var formData = new FormData();
+            
+            var fileInput1 = document.getElementById('s1_listening_image1');
+            var file1 = fileInput1.files[0];
+            formData.append('image1', file1);
+      
+            var fileInput2 = document.getElementById('s1_listening_image2');
+            var file2 = fileInput2.files[0];
+            formData.append('image2', file2);
+
+            var fileInput3 = document.getElementById('s1_listening_image3');
+            var file3 = fileInput3.files[0];
+            formData.append('image3', file3);
+
+            fetch('upload_listening.php', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              if (response.ok) {
+                alert('Images uploaded successfully!');
+              } else {
+                alert('Error uploading images.');
+              }
+            })
+            .catch(error => {
+              console.error(error);
+              alert('An error occurred during the upload.');
+            });
+
+            
+            var newValue1 = document.getElementById("name_listening").value;
+            
+            // Get a reference to the document to be updated
+            var docRef = db.collection("language_activity_updatable_data").doc("listening");
+            docRef.update({
+                word1: newValue1,
+            })
+            .then(function() {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });    
+        }
+
+    </script>
+</head>
+<body>
+
+    <h1 class="text1"> Update Activity Data </h1>
+
+    <script>
+       
+    </script>
+
+ 
+        <div class="speaking_update">
+            
+            <div class="catagory_heading">
+                <p>Speaking </p>
+            </div>
+       
+            <div class="speaking_steps">
+                <div class="step1">
+                    <p class="activity_text">Step 01 </p>
+                    <div id="image-preview1" class="image-preview" ></div><br>
+                   <!-- <img class="image-preview" id="image-preview1"></img><br> -->
+                    
+                    <input type="file" id="image-input1" style="display: none;" onchange="previewImage(event, 'image-preview1')">
+                    <label class="small_button" for="image-input1" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking1" placeholder="Name">
+             
+                </div>
+                <div class="step2">
+                    <p class="activity_text">Step 02 </p>
+                    <div class="image-preview" id="image-preview2"></div><br>
+                    <input type="file" id="image-input2" style="display: none;" onchange="previewImage(event, 'image-preview2')">
+                    <label class="small_button" for="image-input2" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking2" placeholder="Name">
+                    
+                </div>
+                <div class="step3">
+                    <p class="activity_text"> Step 03 </p>
+                    <div class="image-preview" id="image-preview3"></div><br>
+                    <input type="file" id="image-input3" style="display: none;" onchange="previewImage(event, 'image-preview3')">
+                    <label class="small_button" for="image-input3" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking3" placeholder="Name">
+                    
+                </div>
+                <div class="step4">
+                    <p class="activity_text">Step 04 </p>
+                    <div class="image-preview" id="image-preview4"></div><br>
+                    <input type="file" id="image-input4" style="display: none;" onchange="previewImage(event, 'image-preview4')">
+                    <label class="small_button" for="image-input4" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking4" placeholder="Name">
+                    
+                </div>
+                <div class="step5">
+                    <p class="activity_text">Step 05 </p>
+                    <div class="image-preview" id="image-preview5"></div><br>
+                    <input type="file" id="image-input5" style="display: none;" onchange="previewImage(event, 'image-preview5')">
+                    <label class="small_button" for="image-input5" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking5" placeholder="Name">
+                    
+                </div>
+            </div>
+
+            <div>
+                <button class="button" onclick="uploadSpeakingData()">Upload</button>
+            </div>
+
+        </div>
+
+
+        <div class="reading_update">
+
+            <div class="catagory_heading">
+                <p>Reading </p>
+            </div>
+
+            
+            <div class="step_heading"> <p> Step 01 </p></div>
+            <div class="writing_update_row">  
+                <div class="word">
+                    <p> Upload a suitable picture that contain a word</p>
+                    <div class="image-preview-reading" id="s1_reading_word_image_pre"></div>
+                    <input type="file" id="s1_reading_word_image" style="display: none;" onchange="previewImage(event, 's1_reading_word_image_pre')">
+                    <label class="small_button_reading" for="s1_reading_word_image" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 01</p>
+                    <div class="image-preview-reading-selection" id="s1_reading_letter_image1_pre"></div>
+                    <input type="file" id="s1_reading_letter_image1" style="display: none;" onchange="previewImage(event, 's1_reading_letter_image1_pre')">
+                    <label class="small_button" for="s1_reading_letter_image1" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 02</p>
+                    <div class="image-preview-reading-selection" id="s1_reading_letter_image2_pre"></div>
+                    <input type="file" id="s1_reading_letter_image2" style="display: none;" onchange="previewImage(event, 's1_reading_letter_image2_pre')">
+                    <label class="small_button" for="s1_reading_letter_image2" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 03</p>
+                    <div class="image-preview-reading-selection" id="s1_reading_letter_image3_pre"></div>
+                    <input type="file" id="s1_reading_letter_image3" style="display: none;" onchange="previewImage(event, 's1_reading_letter_image3_pre')">
+                    <label class="small_button" for="s1_reading_letter_image3" style="cursor: pointer;">Browse</label>
+                </div>
+                <div >
+                    <p class="lettter"> Correct Letter</p>
+                    <input class="textbox_reading" type="text" id="name_writing_1" placeholder="Letter">
+                </div>
+            </div>
+
+            <div>
+                <button class="button" onclick="uploadReadingData1()">Upload</button>
+            </div>
+
+            <div class="step_heading"> <p> Step 02 </p></div>
+            <div class="writing_update_row">  
+                <div class="word">
+                    <p> Upload a suitable picture that contain a word</p>
+                    <div class="image-preview-reading" id="s2_reading_word_image_pre"></div>
+                    <input type="file" id="s2_reading_word_image" style="display: none;" onchange="previewImage(event, 's2_reading_word_image_pre')">
+                    <label class="small_button_reading" for="s2_reading_word_image" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 01</p>
+                    <div class="image-preview-reading-selection" id="s2_reading_letter_image1_pre"></div>
+                    <input type="file" id="s2_reading_letter_image1" style="display: none;" onchange="previewImage(event, 's2_reading_letter_image1_pre')">
+                    <label class="small_button" for="s2_reading_letter_image1" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 02</p>
+                    <div class="image-preview-reading-selection" id="s2_reading_letter_image2_pre"></div>
+                    <input type="file" id="s2_reading_letter_image2" style="display: none;" onchange="previewImage(event, 's2_reading_letter_image2_pre')">
+                    <label class="small_button" for="s2_reading_letter_image2" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 03</p>
+                    <div class="image-preview-reading-selection" id="s2_reading_letter_image3_pre"></div>
+                    <input type="file" id="s2_reading_letter_image3" style="display: none;" onchange="previewImage(event, 's2_reading_letter_image3_pre')">
+                    <label class="small_button" for="s2_reading_letter_image3" style="cursor: pointer;">Browse</label>
+                </div>
+                <div >
+                    <p class="lettter"> Correct Letter</p>
+                    <input class="textbox_reading" type="text" id="name_writing_2" placeholder="Letter">
+                </div>
+            </div>
+
+            <div>
+                <button class="button" onclick="uploadReadingData2()">Upload</button>
+            </div>
+
+            <div class="step_heading"> <p> Step 03 </p></div>
+            <div class="writing_update_row">  
+                <div class="word">
+                    <p> Upload a suitable picture that contain a word</p>
+                    <div class="image-preview-reading" id="s3_reading_word_image_pre"></div>
+                    <input type="file" id="s3_reading_word_image" style="display: none;" onchange="previewImage(event, 's3_reading_word_image_pre')">
+                    <label class="small_button_reading" for="s3_reading_word_image" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 01</p>
+                    <div class="image-preview-reading-selection" id="s3_reading_letter_image1_pre"></div>
+                    <input type="file" id="s3_reading_letter_image1" style="display: none;" onchange="previewImage(event, 's3_reading_letter_image1_pre')">
+                    <label class="small_button" for="s3_reading_letter_image1" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 02</p>
+                    <div class="image-preview-reading-selection" id="s3_reading_letter_image2_pre"></div>
+                    <input type="file" id="s3_reading_letter_image2" style="display: none;" onchange="previewImage(event, 's3_reading_letter_image2_pre')">
+                    <label class="small_button" for="s3_reading_letter_image2" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 03</p>
+                    <div class="image-preview-reading-selection" id="s3_reading_letter_image3_pre"></div>
+                    <input type="file" id="s3_reading_letter_image3" style="display: none;" onchange="previewImage(event, 's3_reading_letter_image3_pre')">
+                    <label class="small_button" for="s3_reading_letter_image3" style="cursor: pointer;">Browse</label>
+                </div>
+                <div >
+                    <p class="lettter"> Correct Letter</p>
+                    <input class="textbox_reading" type="text" id="name_writing_3" placeholder="Letter">
+                </div>
+            </div>
+
+            <div>
+                <button class="button" onclick="uploadReadingData3()">Upload</button>
+            </div>
+
+            <div class="step_heading"> <p> Step 04 </p></div>
+            <div class="writing_update_row">  
+                <div class="word">
+                    <p> Upload a suitable picture that contain a word</p>
+                    <div class="image-preview-reading" id="s4_reading_word_image_pre"></div>
+                    <input type="file" id="s4_reading_word_image" style="display: none;" onchange="previewImage(event, 's4_reading_word_image_pre')">
+                    <label class="small_button_reading" for="s4_reading_word_image" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 01</p>
+                    <div class="image-preview-reading-selection" id="s4_reading_letter_image1_pre"></div>
+                    <input type="file" id="s4_reading_letter_image1" style="display: none;" onchange="previewImage(event, 's4_reading_letter_image1_pre')">
+                    <label class="small_button" for="s4_reading_letter_image1" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 02</p>
+                    <div class="image-preview-reading-selection" id="s4_reading_letter_image2_pre"></div>
+                    <input type="file" id="s4_reading_letter_image2" style="display: none;" onchange="previewImage(event, 's4_reading_letter_image2_pre')">
+                    <label class="small_button" for="s4_reading_letter_image2" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 03</p>
+                    <div class="image-preview-reading-selection" id="s4_reading_letter_image3_pre"></div>
+                    <input type="file" id="s4_reading_letter_image3" style="display: none;" onchange="previewImage(event, 's4_reading_letter_image3_pre')">
+                    <label class="small_button" for="s4_reading_letter_image3" style="cursor: pointer;">Browse</label>
+                </div>
+                <div >
+                    <p class="lettter"> Correct Letter</p>
+                    <input class="textbox_reading" type="text" id="name_writing_4" placeholder="Letter">
+                </div>
+            </div>
+
+            <div>
+                <button class="button" onclick="uploadReadingData4()">Upload</button>
+            </div>
+
+            <div class="step_heading"> <p> Step 05 </p></div>
+            <div class="writing_update_row">  
+                <div class="word">
+                    <p> Upload a suitable picture that contain a word</p>
+                    <div class="image-preview-reading" id="s5_reading_word_image_pre"></div>
+                    <input type="file" id="s5_reading_word_image" style="display: none;" onchange="previewImage(event, 's5_reading_word_image_pre')">
+                    <label class="small_button_reading" for="s5_reading_word_image" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 01</p>
+                    <div class="image-preview-reading-selection" id="s5_reading_letter_image1_pre"></div>
+                    <input type="file" id="s5_reading_letter_image1" style="display: none;" onchange="previewImage(event, 's5_reading_letter_image1_pre')">
+                    <label class="small_button" for="s5_reading_letter_image1" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 02</p>
+                    <div class="image-preview-reading-selection" id="s5_reading_letter_image2_pre"></div>
+                    <input type="file" id="s5_reading_letter_image2" style="display: none;" onchange="previewImage(event, 's5_reading_letter_image2_pre')">
+                    <label class="small_button" for="s5_reading_letter_image2" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 03</p>
+                    <div class="image-preview-reading-selection" id="s5_reading_letter_image3_pre"></div>
+                    <input type="file" id="s5_reading_letter_image3" style="display: none;" onchange="previewImage(event, 's5_reading_letter_image3_pre')">
+                    <label class="small_button" for="s5_reading_letter_image3" style="cursor: pointer;">Browse</label>
+                </div>
+                <div >
+                    <p class="lettter"> Correct Letter</p>
+                    <input class="textbox_reading" type="text" id="name_writing_5" placeholder="Letter">
+                </div>
+            </div>
+
+            <div>
+                <button class="button" onclick="uploadReadingData5()">Upload</button>
+            </div>
+    
+        </div>
+
+
+
+        <div class="writing_update">
+            <div class="catagory_heading">
+                <p>Writing </p>
+            </div>
+
+            <div class="speaking_steps">
+                <div class="step1">
+                    <p class="activity_text">Letter 01 </p>
+                    <div class="image-preview" id="image1-preview1"></div><br>
+                    <input type="file" id="image1-input1" style="display: none;" onchange="previewImage(event, 'image1-preview1')">
+                    <label class="small_button" for="image1-input1" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking" placeholder="Name">
+             
+                </div>
+                <div class="step2">
+                    <p class="activity_text">Letter 02 </p>
+                    <div class="image-preview" id="image1-preview2"></div><br>
+                    <input type="file" id="image1-input2" style="display: none;" onchange="previewImage(event, 'image1-preview2')">
+                    <label class="small_button" for="image1-input2" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking" placeholder="Name">
+                    
+                </div>
+                <div class="step3">
+                    <p class="activity_text"> Letter 03 </p>
+                    <div class="image-preview" id="image1-preview3"></div><br>
+                    <input type="file" id="image1-input3" style="display: none;" onchange="previewImage(event, 'image1-preview3')">
+                    <label class="small_button" for="image1-input3" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking" placeholder="Name">
+                    
+                </div>
+                <div class="step4">
+                    <p class="activity_text">Letter 04 </p>
+                    <div class="image-preview" id="image1-preview4"></div><br>
+                    <input type="file" id="image1-input4" style="display: none;" onchange="previewImage(event, 'image1-preview4')">
+                    <label class="small_button" for="image1-input4" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking" placeholder="Name">
+                    
+                </div>
+                <div class="step5">
+                    <p class="activity_text">Letter 05 </p>
+                    <div class="image-preview" id="image1-preview5"></div><br>
+                    <input type="file" id="image1-input5" style="display: none;" onchange="previewImage(event, 'image1-preview5')">
+                    <label class="small_button" for="image1-input5" style="cursor: pointer;">Browse</label>
+                    <input class="textbox" type="text" id="name_speaking" placeholder="Name">
+                    
+                </div>
+            </div>
+
+            <div>
+                <button class="button" onclick="uploadWritingData()">Upload</button>
+            </div>
+            
+    
+        </div>
+
+        <div class="listening_update">
+
+            <div class="catagory_heading">
+                <p>Listening </p>
+            </div>
+
+            <div class="step_heading"> <p> Step 01 </p></div>
+            <div class="writing_update_row">  
+                <div class="word">
+                    <p class="audio_text"> Audio that descibes one of three pictures</p>
+                    <button class="button_voice" id="recordButton" onclick="startRecording()">Record</button>
+                    <button class="button_voice" id="stopButton" onclick="stopRecording()" disabled>Stop</button>
+                    <button class="button_voice" id="playButton" onclick="playRecording()" disabled>Play</button>
+                    <button class="button_voice" id="saveButton" onclick="saveRecording()" disabled>Save</button>
+                    <script>
+                        // Variables to store audio stream and recorded chunks
+                        let stream;
+                        let chunks = [];
+                        let recordedAudioUrl;
+                    
+                        // Access the user's microphone and start recording
+                        function startRecording() {
+                          navigator.mediaDevices.getUserMedia({ audio: true })
+                            .then(function (audioStream) {
+                              stream = audioStream;
+                              const mediaRecorder = new MediaRecorder(audioStream);
+                              mediaRecorder.addEventListener("dataavailable", function (e) {
+                                chunks.push(e.data);
+                              });
+                              mediaRecorder.addEventListener("stop", function () {
+                                const audioBlob = new Blob(chunks);
+                                recordedAudioUrl = URL.createObjectURL(audioBlob);
+                                enableButton("playButton");
+                                enableButton("saveButton");
+                              });
+                    
+                              mediaRecorder.start();
+                              disableButton("recordButton");
+                              enableButton("stopButton");
+                            })
+                            .catch(function (err) {
+                              console.error("Error accessing the microphone: " + err);
+                            });
+                        }
+                    
+                        // Stop recording and release the microphone
+                        function stopRecording() {
+                          const mediaRecorder = stream.getTracks()[0];
+                          mediaRecorder.stop();
+                          stream.getTracks().forEach(function (track) {
+                            track.stop();
+                          });
+                          chunks = [];
+                          enableButton("recordButton");
+                          disableButton("stopButton");
+                        }
+                    
+                        // Play the recorded audio
+                        function playRecording() {
+                          const audio = new Audio(recordedAudioUrl);
+                          audio.play();
+                        }
+                    
+                        // Save the recorded audio to the server
+                        function saveRecording() {
+                          const formData = new FormData();
+                          const audioBlob = new Blob(chunks, { type: "audio/wav" });
+                          formData.append("audio", audioBlob, "r1.wav");
+                          fetch("save_recording1.php", {
+                            method: "POST",
+                            body: formData
+                          })
+                            .then(function (response) {
+                              console.log("Recording saved successfully!");
+                              disableButton("saveButton");
+                            })
+                            .catch(function (err) {
+                              console.error("Error saving recording: " + err);
+                            });
+                        }
+                    
+                        // Helper function to disable a button
+                        function disableButton(id) {
+                          document.getElementById(id).disabled = true;
+                        }
+                    
+                        // Helper function to enable a button
+                        function enableButton(id) {
+                          document.getElementById(id).disabled = false;
+                        }
+                      </script>
+
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 01</p>
+                    <div class="image-preview-reading-selection" id="s1_listening_image1_pre"></div>
+                    <input type="file" id="s1_listening_image1" style="display: none;" onchange="previewImage(event, 's1_listening_image1_pre')">
+                    <label class="small_button" for="s1_listening_image1" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 01</p>
+                    <div class="image-preview-reading-selection" id="s1_listening_image2_pre"></div>
+                    <input type="file" id="s1_listening_image2" style="display: none;" onchange="previewImage(event, 's1_listening_image2_pre')">
+                    <label class="small_button" for="s1_listening_image2" style="cursor: pointer;">Browse</label>
+                </div>
+                <div class="word">
+                    <p class="word_selection"> Selection 01</p>
+                    <div class="image-preview-reading-selection" id="s1_listening_image3_pre"></div>
+                    <input type="file" id="s1_listening_image3" style="display: none;" onchange="previewImage(event, 's1_listening_image3_pre')">
+                    <label class="small_button" for="s1_listening_image3" style="cursor: pointer;">Browse</label>
+                </div>
+                <div >
+                    <p class="lettter"> Word </p>
+                    <input class="textbox_reading" type="text" id="name_listening" placeholder="Word">
+                </div>
+
+
+            </div>
+
+            <div>
+                <button class="button" onclick="uploadListeningData()">Upload</button>
+            </div>
+
+
+    
+        </div>
+
+
+        <div class="button_row">
+            <div class="back_button">
+                <button class="button1" onclick="goBack()">Back</button>
+       
+            </div>
+            <div class="complete_button">
+                <button class="button2" onclick="goBack()">OK</button>
+                
+            </div>
+        </div>
+        
+    
+</body>
+</html>

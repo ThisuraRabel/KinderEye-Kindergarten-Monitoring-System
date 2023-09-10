@@ -1,0 +1,50 @@
+
+
+.text1{
+    font-size: 30px;
+    text-align: center;
+    justify-content: center;
+}
+
+.text2{
+  font-size: 20px;
+  text-align: center;
+  justify-content: center;
+}
+
+
+
+.loader {
+   
+    position: fixed;
+    display: flex; 
+  
+    top: 5;
+    left: 0;
+    width: 100vw;
+    height: 40vh;
+   
+    align-items: center;
+    justify-content: center;
+ 
+    transition: opacity 0.75s, visibility 0.75s;
+  }
+  
+  .loader::after {
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid #dddddd;
+    border-top-color: #009578;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+  }
+  
+  @keyframes loading {
+    from {
+      transform: rotate(0turn);
+    }
+    to {
+      transform: rotate(1turn);
+    }
+  }
