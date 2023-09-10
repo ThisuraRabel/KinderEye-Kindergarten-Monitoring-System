@@ -1,1 +1,1 @@
-# KinderEye-Kindergarten-Monitoring-System
+# KinderEye: Kindergarten Monitoring System
